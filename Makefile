@@ -1,14 +1,15 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
+LDFLAGS = -lm
 TARGET = program
 
-SRC = main.c
+SRC = code.c
 OBJ = $(SRC:.c=.o)
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(LDFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
