@@ -1,21 +1,25 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
-LDFLAGS = -lm
-TARGET = program
+BINDIR = bin
 
-SRC = code.c
-OBJ = $(SRC:.c=.o)
+all: $(BINDIR) task1 task2 task3 task4
 
-all: $(TARGET)
+$(BINDIR):
+	mkdir -p $(BINDIR)
 
-$(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ) $(LDFLAGS)
+task1: task1/task1.c
+	$(CC) $(CFLAGS) task1/task1.c -o $(BINDIR)/task1
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+task2: task2/task2.c
+	$(CC) $(CFLAGS) -o $(BINDIR)/task2 task2/task2.c
+
+task3: task3/task3.c
+	$(CC) $(CFLAGS) -o $(BINDIR)/task3 task3/task3.c
+
+task4: task4/task4.c
+	$(CC) $(CFLAGS) -o $(BINDIR)/task4 task4/task4.c -lm
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -rf $(BINDIR)
 
-run: all
-	./$(TARGET)
+.PHONY: all clean task1 task2 task3 task4
